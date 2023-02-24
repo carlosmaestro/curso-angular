@@ -5,8 +5,8 @@ import { Component, OnInit } from '@angular/core';
 import { Course } from './../model/course';
 import { Observable, of } from 'rxjs';
 import { catchError } from 'rxjs/operators';
+import { MatLegacyDialog as MatDialog } from '@angular/material/legacy-dialog';
 import { HttpErrorResponse } from '@angular/common/http';
-import { MatDialog } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-courses',

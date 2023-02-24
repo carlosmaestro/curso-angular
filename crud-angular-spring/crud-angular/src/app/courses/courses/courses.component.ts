@@ -7,6 +7,7 @@ import { Observable, of } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 import { HttpErrorResponse } from '@angular/common/http';
 import { MatDialog } from '@angular/material/dialog';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-courses',
@@ -21,7 +22,9 @@ export class CoursesComponent implements OnInit {
 
   constructor(
     private coursesService: CoursesService,
-    public dialog: MatDialog
+    public dialog: MatDialog,
+    private router: Router,
+    private route: ActivatedRoute
   ) {
     this.courses$ = this.coursesService.list()
       .pipe(
@@ -31,7 +34,7 @@ export class CoursesComponent implements OnInit {
           return of([]);
         })
       );
-    this.displayedColumns = ['name', 'category'];
+    this.displayedColumns = ['name', 'category', 'actions'];
   }
 
   ngOnInit(): void {
@@ -41,6 +44,11 @@ export class CoursesComponent implements OnInit {
     this.dialog.open(ErrorDialogComponent, {
       data: errorMsg,
     });
+  }
+
+  onAdd() {
+    console.log('onAdd');
+    this.router.navigate(['new'], { relativeTo: this.route });
   }
 
 

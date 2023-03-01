@@ -1,6 +1,6 @@
 import { Location } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { FormBuilder, NonNullableFormBuilder, UntypedFormGroup } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
 
 import { CoursesService } from './../services/courses.service';
@@ -12,11 +12,15 @@ import { CoursesService } from './../services/courses.service';
 })
 export class CourseFormComponent implements OnInit {
 
-  form: FormGroup;
+  form = this.formbuilder.group({
+    name: [''],
+    category: [''],
+  });
+
   categorias: { value: any, display: string }[];
 
   constructor(
-    private formbuilder: FormBuilder,
+    private formbuilder: NonNullableFormBuilder,
     private service: CoursesService,
     private _snackBar: MatSnackBar,
     private location: Location
@@ -25,17 +29,13 @@ export class CourseFormComponent implements OnInit {
       { display: 'Front-End', value: 'front-end' },
       { display: 'Back-End', value: 'back-end' },
     ];
-    this.form = this.formbuilder.group({
-      name: [null],
-      category: [null],
-    });
   }
 
   ngOnInit(): void {
   }
 
   onCancel() {
-    this,this.location.back();
+    this, this.location.back();
   }
 
   onSubmit() {

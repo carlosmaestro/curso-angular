@@ -1,0 +1,23 @@
+
+# Create course
+POST http://localhost:8080/api/courses
+Content-Type: application/json
+
+{
+  "name": "teste 123",
+  "category": "Front-end"
+}
+###
+
+# GET courses
+GET http://localhost:8080/api/courses
+
+###
+
+# DELETE course
+DELETE  http://localhost:8080/api/courses/3
+
+###
+
+# GET course
+GET   http://localhost:8080/api/courses/3

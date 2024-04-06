@@ -32,8 +32,8 @@ export class CourseFormComponent implements OnInit {
     private route: ActivatedRoute
   ) {
     this.categorias = [
-      { display: 'Front-End', value: 'front-end' },
-      { display: 'Back-End', value: 'back-end' },
+      { display: 'Front-End', value: 'Front-end' },
+      { display: 'Back-End', value: 'Back-end' },
     ];
   }
 

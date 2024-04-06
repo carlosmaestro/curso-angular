@@ -20,4 +20,15 @@ DELETE  http://localhost:8080/api/courses/3
 ###
 
 # GET course
-GET   http://localhost:8080/api/courses/3
+GET   http://localhost:8080/api/courses/4
+
+### 
+
+# UPDATE course
+PUT http://localhost:8080/api/courses/1
+Content-Type: application/json
+
+{
+  "name": "Update course 1",
+  "category": "Back-end"
+}

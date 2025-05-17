@@ -9,8 +9,8 @@ public enum Category {
     this.value = value;
   }
 
-  public String getValue(){
-    return  value;
+  public String getValue() {
+    return value;
   }
 
   @Override

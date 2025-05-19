@@ -21,6 +21,6 @@ export class CourseResolver implements Resolve<Course> {
     if (route?.params['id']) {
       return this.coursesService.loadById(route?.params['id']);
     }
-    return of({ _id: '', name: '', category: '' });
+    return of({ _id: '', name: '', category: '', lessons:[] });
   }
 }

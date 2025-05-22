@@ -1,7 +1,6 @@
 package com.maestro.crudspring.service;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 import org.springframework.stereotype.Service;
 import org.springframework.validation.annotation.Validated;
@@ -30,7 +29,7 @@ public class CourseService {
     return courseRepository.findAll()
         .stream()
         .map(courseMapper::toDTO)
-        .collect(Collectors.toList());
+        .toList();
   }
 
   public CourseDTO findById(@NotNull @Positive Long id) {

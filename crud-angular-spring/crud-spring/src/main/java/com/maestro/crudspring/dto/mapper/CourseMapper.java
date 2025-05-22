@@ -1,12 +1,12 @@
 package com.maestro.crudspring.dto.mapper;
 
 import java.util.List;
-import java.util.Locale.Category;
 
 import org.springframework.stereotype.Component;
 
 import com.maestro.crudspring.dto.CourseDTO;
 import com.maestro.crudspring.dto.LessonDTO;
+import com.maestro.crudspring.enums.Category;
 import com.maestro.crudspring.model.Course;
 
 @Component

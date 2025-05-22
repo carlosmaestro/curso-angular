@@ -1,11 +1,12 @@
 import { Location } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
-import { NonNullableFormBuilder, Validators } from '@angular/forms';
+import { FormGroup, NonNullableFormBuilder, Validators } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
 
 import { ActivatedRoute } from '@angular/router';
-import { CoursesService } from '../../services/courses.service';
 import { Course } from '../../model/course';
+import { Lesson } from '../../model/lesson';
+import { CoursesService } from '../../services/courses.service';
 
 @Component({
   selector: 'app-course-form',
@@ -13,14 +14,8 @@ import { Course } from '../../model/course';
   styleUrls: ['./course-form.component.scss'],
 })
 export class CourseFormComponent implements OnInit {
-  form = this.formbuilder.group({
-    _id: [''],
-    name: [
-      '',
-      [Validators.required, Validators.minLength(5), Validators.maxLength(100)],
-    ],
-    category: ['', Validators.required],
-  });
+  form !: FormGroup;
+
 
   categorias: { value: any; display: string }[];
 
@@ -40,10 +35,34 @@ export class CourseFormComponent implements OnInit {
   ngOnInit(): void {
     const course: Course = this.route.snapshot.data['course'];
     const { _id, name, category } = course;
-    this.form.setValue({
-      _id,
+    this.form = this.formbuilder.group({
+    _id: [_id],
+    name: [
       name,
-      category,
+      [Validators.required, Validators.minLength(5), Validators.maxLength(100)],
+    ],
+    category: [category, Validators.required],
+    lessons: this.formbuilder.array(this.retrieveLessons(course))
+  });
+  }
+
+  private retrieveLessons(course: Course){
+    const lessons = [];
+
+    if(course?.lessons){
+      course.lessons.forEach(lesson=> lessons.push(this.createLesson(lesson)));
+    }else{
+      lessons.push(this.createLesson());
+    }
+
+    return lessons;
+  }
+
+  private createLesson(lesson: Lesson= {id: '', name: '', youtubeUrl: ''}){
+    return this.formbuilder.group({
+      id: [lesson.id],
+      name: [lesson.name],
+      youtubeUrl: [lesson.youtubeUrl]
     });
   }
 

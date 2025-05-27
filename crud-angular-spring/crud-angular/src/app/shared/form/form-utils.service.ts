@@ -14,7 +14,7 @@ export class FormUtilsService {
   constructor() {}
 
   validateAllFormFields(formGroup: FormGroup | UntypedFormArray) {
-    Object.keys(formGroup).forEach((field) => {
+    Object.keys(formGroup.controls).forEach((field) => {
       const control = formGroup.get(field);
       if (control instanceof UntypedFormControl) {
         control.markAsTouched({ onlySelf: true });
